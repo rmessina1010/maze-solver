@@ -1,0 +1,120 @@
+<html>
+	<head>
+		<title>Maze</title>
+		<style type="text/css" media="screen">
+			body{ 
+				text-align: center;
+			}
+			.controls{
+				margin: 0  auto;
+			} 									
+			#maze{
+				border:1px solid ;
+				border-collapse: collapse;
+				margin: 0  auto;
+  			}
+
+			#maze td{
+				height:2vw;
+				width:1.8vw ;
+				line-height: 0;
+				font-size: 0;
+				border: 1px #aaa solid;
+			}
+
+			.wall{
+				background: #000000;
+			}
+			.start{
+				background: red;
+			}
+			.end{
+				background: green;
+			}
+			.row{ padding-top:.67em}
+			input[name="height"], input[name="width"]{ width: 4em; margin:0 1em}
+		</style>
+	</head>
+	<body>
+		 <table id="maze" ></table>
+		 <div class="controls">
+			<div class="row">
+				<label>Height:<input name="height" id="height"  type="number" min="5" value="5"/></label> 
+				<label>Width:<input name="width" id="width"  type="number" min="5" value="5"/></label>
+			</div>
+			<div class="row space">
+				<label><input name="cellType"   id="wallCell"  checked  type="radio" value="wall"/> Wall</label>
+				<label><input name="cellType" id="startCell"    type="radio" value=""/> Start</label>
+				<label><input name="cellType"    id="endCell"  type="radio" value=""/> End</label>
+ 			</div>
+
+			<div class="row">
+				 <button onclick="createGrid(maze,parseInt(width.value), parseInt(height.value))">Create Grid</button>
+				 <button onclick="">Solve</button>
+			 </div>
+		 </div>
+	</body>
+	<script>
+		function registerMaze(el){
+ 
+			el.addEventListener('mousedown',
+				ev=>{
+					if ( ev.target.tagName==='TD' && wallCell.checked) {
+ 					ev.preventDefault();
+					el.mode = ev.target.classList.toggle('wall');
+ 					el.act =    true ;
+ 					}
+				}
+			);
+			el.addEventListener('mouseup',
+ 				ev=>{ 
+					el.act =    false ; 
+					if ( ev.target.tagName==='TD'){
+						if (startCell.checked || endCell.checked){
+							if (ev.target.classList.contains('wall')){
+								ev.target.classList.remove('wall');
+								ev.target.classList.add('old-wall')
+							}
+							if (endCell.checked){
+								  if(el.endCell) {
+									  	el.endCell.classList.remove('end');
+										if (ev.target.classList.contains('old-wall')){
+											ev.target.classList.remove('old-wall');
+											ev.target.classList.add('wall')
+										}
+								  }
+								  el.endCell = ev.target;
+								  el.endCell.classList.add('end');
+							}else{
+								  if(el.startCell) {
+										el.startCell.classList.remove('start');
+										if (ev.target.classList.contains('old-wall')){
+											ev.target.classList.remove('old-wall');
+											ev.target.classList.add('wall')
+										}
+								  }
+								  el.startCell = ev.target;
+								  el.startCell.classList.add('start');
+							}
+						}
+					}
+				}
+			);
+			el.addEventListener('mouseover',
+				ev=>{
+ 					if (el.act  && ev.target.tagName==='TD' && wallCell.checked){
+ 						ev.target.classList.toggle('wall',el.mode);
+					}
+				}
+			);
+
+		}
+
+		function createGrid(tableEl,x,y){
+ 			tableEl.innerHTML = ('<tr>'+'<td class="cel">&nbsp;</td>'.repeat(x)+'</tr>').repeat(y);		 
+		}
+		 
+		registerMaze(maze);
+	</script>
+	
+</html>
