@@ -60,6 +60,12 @@
 			background: #000000;
 		}
 
+      .path{
+		background: pink;
+
+	}
+
+
 		.start {
 			background: red;
 		}
