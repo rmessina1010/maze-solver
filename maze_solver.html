@@ -27,8 +27,8 @@
 
 			<div class="row">
 				<button onclick="createGrid(maze,parseInt(width.value), parseInt(height.value))">Create Grid</button>
-				<button onclick="">Reset Grid</button>
-				<button onclick="var m = new mazeRunner(maze); m.run()">Solve</button>
+				<button onclick="reset(maze)">Reset Grid</button>
+				<button onclick="new mazeRunner(maze).run()">Solve</button>
 			</div>
 		</div>
 	</div>

@@ -55,16 +55,14 @@
 			font-size: 1px;
 			border: 1px #aaa solid;
 		}
-
-		.wall {
-			background: #000000;
-		}
-
-      .path{
+       .path{
 		background: pink;
 
 	}
 
+		.wall {
+			background: #000000;
+		}
 
 		.start {
 			background: red;

@@ -16,7 +16,7 @@ function registerMaze(el, wallCell, startCell, endCell) {
                     if (endCell.checked) {
                         if (el.endCell) {
                             el.endCell.classList.remove('end');
-                            wasWall(el.startCell);
+                            wasWall(el.endCell);
                         }
                         el.endCell = ev.target;
                         el.endCell.classList.add('end');
@@ -29,7 +29,6 @@ function registerMaze(el, wallCell, startCell, endCell) {
                         el.startCell.classList.add('start');
                     }
                     isWall(ev.target);
-
                 }
             }
         }
@@ -139,7 +138,7 @@ function maze_node(prev, tis, col, row, isTarget) {
     this.goal = isTarget;
 }
 
-function clear(el) {
-
+function reset(el) {
+    el.querySelectorAll('.path').forEach(cell => cell.classList.remove('path'));
 }
 
