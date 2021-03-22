@@ -1,6 +1,10 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Maze Solver</title>
 	<link rel="stylesheet" href="css/main_style.css" type="text/css" media="screen" charset="utf-8">
 	<script src="js/mazeFunctions.js" type="text/javascript"></script>
@@ -28,7 +32,12 @@
 			<div class="row">
 				<button onclick="createGrid(maze,parseInt(width.value), parseInt(height.value))">Create Grid</button>
 				<button onclick="reset(maze)">Reset Grid</button>
+				<button onclick="saveMaze(maze)">Save Grid</button>
 				<button onclick="new mazeRunner(maze).run()">Solve</button>
+			</div>
+			<div class="row">
+				<input type="file" name="loadFile" id="loadFile" accept=".txt,.html,.htm">
+				<button onclick="loadMaze(loadFile, maze)">Load Grid</button>
 			</div>
 		</div>
 	</div>

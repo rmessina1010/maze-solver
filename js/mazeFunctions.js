@@ -142,3 +142,22 @@ function reset(el) {
     el.querySelectorAll('.path').forEach(cell => cell.classList.remove('path'));
 }
 
+function saveMaze(el) {
+    text = el.innerHTML;
+    let temp = document.createElement('a');
+    let data = new Blob([text], { type: 'text/plain' });
+    temp.href = window.URL.createObjectURL(data);
+    temp.setAttribute('download', 'savedMaze' + (new Date().toLocaleString('en-US')).replaceAll(/[\/:]/g, '_') + '.html');
+    temp.dispatchEvent(new Event('click'));
+    window.URL.revokeObjectURL(temp);
+}
+
+
+function loadMaze(inp, out) {
+    let fr = new FileReader();
+    fr.onload = function () {
+        out.innerHTML = fr.result;
+        out.parentNode.classList.add('table-border')
+    }
+    fr.readAsText(inp.files[0]);
+}
