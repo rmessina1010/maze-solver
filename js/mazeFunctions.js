@@ -148,8 +148,9 @@ function saveMaze(el) {
     let data = new Blob([text], { type: 'text/plain' });
     temp.href = window.URL.createObjectURL(data);
     temp.setAttribute('download', 'savedMaze' + (new Date().toLocaleString('en-US')).replaceAll(/[\/:]/g, '_') + '.html');
-    temp.dispatchEvent(new Event('click'));
+    temp.click();
     window.URL.revokeObjectURL(temp);
+    temp = null;
 }
 
 
